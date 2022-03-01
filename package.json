@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "i18n client and serer internationalization",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "jest"
+  },
   "keywords": [
     "JavaScript",
     "i18n"
