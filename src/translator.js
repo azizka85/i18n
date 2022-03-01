@@ -196,6 +196,8 @@ class Translator {
         const value = ctx.matches[key];
 
         equal = equal && value === context[key];
+
+        if(!equal) break;
       }
 
       if(equal) {
