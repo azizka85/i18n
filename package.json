@@ -1,6 +1,6 @@
 {
   "name": "@azizka/i18n",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "i18n client and serer internationalization",
   "main": "index.js",
   "scripts": {
