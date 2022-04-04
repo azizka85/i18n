@@ -1,2 +1,2 @@
 # i18n
- i18n client and serer internationalization
+ i18n client and server internationalization
