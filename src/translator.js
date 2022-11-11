@@ -1,15 +1,31 @@
 const { isObject } = require('./utils');
 
 class Translator {
+  /**
+   * @type {import('./data/data-options').DataOptions | undefined}
+   * @protected
+   */
   data;
+  /**
+   * @type {import('./data/formatting-context').FormattingContext}
+   * @protected
+   */
   globalContext;
 
+  /**
+   * @type {((text: string | number, num?: number, formatting?: FormattingContext, data?: Values) => string | number) | undefined} 
+   * @protected
+   */
   extension;
 
   constructor() {
     this.resetContext();
   }
 
+  /**
+   * @param {import('./data/data-options').DataOptions} data 
+   * @returns {Translator}
+   */
   static create(data) {
     const translator = new Translator();
 
@@ -18,6 +34,13 @@ class Translator {
     return translator;
   }
 
+  /**
+   * @param {string | number} text 
+   * @param {number | import('./data/formatting-context').FormattingContext | undefined} defaultNumOrFormatting 
+   * @param {number | import('./data/formatting-context').FormattingContext | undefined} numOrFormattingOrContext 
+   * @param {import('./data/formatting-context').FormattingContext | undefined} formattingOrContext 
+   * @returns {string}
+   */
   translate(text, defaultNumOrFormatting, numOrFormattingOrContext, formattingOrContext) {
     let num = undefined;
     let formatting = undefined;
@@ -52,6 +75,9 @@ class Translator {
     return this.translateText(text, num, formatting, context);
   }
 
+  /**
+   * @param {import('./data/data-options').DataOptions} data 
+   */
   add(data) {
     if(!this.data) {
       this.data = data;
@@ -70,14 +96,24 @@ class Translator {
     }
   }
 
+  /**
+   * @param {string} key 
+   * @param {string} value 
+   */
   setContext(key, value) {
     his.globalContext[key] = value;
   }
 
+  /**
+   * @param {(text: string | number, num?: number, formatting?: FormattingContext, data?: Values) => string | number} extension 
+   */
   extend(extension) {
     this.extension = extension;
   }
 
+  /**
+   * @param {string} key 
+   */
   clearContext(key) {
     delete this.globalContext[key];
   }
@@ -98,6 +134,13 @@ class Translator {
     this.globalContext = {};
   }
 
+  /**
+   * @param {string | number} text 
+   * @param {number | undefined} num 
+   * @param {import('./data/formatting-context').FormattingContext | undefined} formatting 
+   * @param {import('./data/formatting-context').FormattingContext | undefined} context 
+   * @returns {string}
+   */
   translateText(text, num, formatting, context) {
     context = context || this.globalContext;
 
@@ -124,6 +167,13 @@ class Translator {
     return result;  
   }
 
+  /**
+   * @param {string | number} text 
+   * @param {number | undefined} num 
+   * @param {import('./data/formatting-context').FormattingContext | undefined} formatting 
+   * @param {import('./data/values').Values | undefined} data 
+   * @returns {string | null}
+   */
   findTranslation(text, num, formatting, data) {
     let value = data?.[text];
 
@@ -166,6 +216,11 @@ class Translator {
     return null;
   }
 
+  /**
+   * @param {string} str 
+   * @param {number} num 
+   * @returns {string}
+   */
   applyNumbers(str, num) {
     str = str.replace('-%n', '' + -num);
     str = str.replace('%n', '' + num);
@@ -173,6 +228,11 @@ class Translator {
     return str;
   }
 
+  /**
+   * @param {string} text 
+   * @param {import('./data/formatting-context').FormattingContext | undefined} formatting 
+   * @returns {string}
+   */
   applyFormatting(text, formatting) {
     if(formatting) {
       for(const key of Object.keys(formatting)) {
@@ -184,6 +244,11 @@ class Translator {
     return text;
   }
 
+  /**
+   * @param {import('./data/data-options').DataOptions} data 
+   * @param {import('./data/formatting-context').FormattingContext} context 
+   * @returns {import('./data/context-options').ContextOptions | null}
+   */
   getContextData(data, context) {
     if(!data.contexts) {
       return null;
@@ -208,6 +273,12 @@ class Translator {
     return null;
   }
 
+  /**
+   * @param {string} text 
+   * @param {number | undefined} num 
+   * @param {import('./data/formatting-context').FormattingContext | undefined} formatting 
+   * @returns {string}
+   */
   useOriginalText(text, num, formatting) {
     if(num === undefined) {
       return this.applyFormatting(text, formatting);
