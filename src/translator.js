@@ -13,7 +13,7 @@ class Translator {
   globalContext;
 
   /**
-   * @type {((text: string | number, num?: number, formatting?: FormattingContext, data?: Values) => string | number) | undefined} 
+   * @type {((text: string | number, num?: number, formatting?: import('./data/formatting-context').FormattingContext, data?: import('./data/values').Values) => string | number) | undefined} 
    * @protected
    */
   extension;
@@ -105,7 +105,7 @@ class Translator {
   }
 
   /**
-   * @param {(text: string | number, num?: number, formatting?: FormattingContext, data?: Values) => string | number} extension 
+   * @param {(text: string | number, num?: number, formatting?: import('./data/formatting-context').FormattingContext, data?: import('./data/values').Values) => string | number} extension 
    */
   extend(extension) {
     this.extension = extension;
