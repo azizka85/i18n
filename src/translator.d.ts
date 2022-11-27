@@ -26,7 +26,7 @@ export class Translator {
      * @param {import('./data/formatting-context').FormattingContext | undefined} formattingOrContext
      * @returns {string}
      */
-    translate(text: string | number, defaultNumOrFormatting: number | import('./data/formatting-context').FormattingContext | undefined, numOrFormattingOrContext: number | import('./data/formatting-context').FormattingContext | undefined, formattingOrContext: import('./data/formatting-context').FormattingContext | undefined): string;
+    translate(text: string | number, defaultNumOrFormatting?: number | import('./data/formatting-context').FormattingContext | undefined, numOrFormattingOrContext?: number | import('./data/formatting-context').FormattingContext | undefined, formattingOrContext?: import('./data/formatting-context').FormattingContext | undefined): string;
     /**
      * @param {import('./data/data-options').DataOptions} data
      */
@@ -54,7 +54,7 @@ export class Translator {
      * @param {import('./data/formatting-context').FormattingContext | undefined} context
      * @returns {string}
      */
-    translateText(text: string | number, num: number | undefined, formatting: import('./data/formatting-context').FormattingContext | undefined, context: import('./data/formatting-context').FormattingContext | undefined): string;
+    translateText(text: string | number, num?: number | undefined, formatting?: import('./data/formatting-context').FormattingContext | undefined, context?: import('./data/formatting-context').FormattingContext | undefined): string;
     /**
      * @param {string | number} text
      * @param {number | undefined} num
@@ -62,7 +62,7 @@ export class Translator {
      * @param {import('./data/values').Values | undefined} data
      * @returns {string | null}
      */
-    findTranslation(text: string | number, num: number | undefined, formatting: import('./data/formatting-context').FormattingContext | undefined, data: import('./data/values').Values | undefined): string | null;
+    findTranslation(text: string | number, num?: number | undefined, formatting?: import('./data/formatting-context').FormattingContext | undefined, data?: import('./data/values').Values | undefined): string | null;
     /**
      * @param {string} str
      * @param {number} num
@@ -74,7 +74,7 @@ export class Translator {
      * @param {import('./data/formatting-context').FormattingContext | undefined} formatting
      * @returns {string}
      */
-    applyFormatting(text: string, formatting: import('./data/formatting-context').FormattingContext | undefined): string;
+    applyFormatting(text: string, formatting?: import('./data/formatting-context').FormattingContext | undefined): string;
     /**
      * @param {import('./data/data-options').DataOptions} data
      * @param {import('./data/formatting-context').FormattingContext} context
@@ -87,5 +87,5 @@ export class Translator {
      * @param {import('./data/formatting-context').FormattingContext | undefined} formatting
      * @returns {string}
      */
-    useOriginalText(text: string, num: number | undefined, formatting: import('./data/formatting-context').FormattingContext | undefined): string;
+    useOriginalText(text: string, num?: number | undefined, formatting?: import('./data/formatting-context').FormattingContext | undefined): string;
 }

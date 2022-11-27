@@ -41,7 +41,7 @@ class Translator {
    * @param {import('./data/formatting-context').FormattingContext | undefined} formattingOrContext 
    * @returns {string}
    */
-  translate(text, defaultNumOrFormatting, numOrFormattingOrContext, formattingOrContext) {
+  translate(text, defaultNumOrFormatting = undefined, numOrFormattingOrContext = undefined, formattingOrContext = undefined) {
     let num = undefined;
     let formatting = undefined;
     let context = this.globalContext;
@@ -141,7 +141,7 @@ class Translator {
    * @param {import('./data/formatting-context').FormattingContext | undefined} context 
    * @returns {string}
    */
-  translateText(text, num, formatting, context) {
+  translateText(text, num = undefined, formatting = undefined, context = undefined) {
     context = context || this.globalContext;
 
     if(!this.data) {
@@ -174,7 +174,7 @@ class Translator {
    * @param {import('./data/values').Values | undefined} data 
    * @returns {string | null}
    */
-  findTranslation(text, num, formatting, data) {
+  findTranslation(text, num = undefined, formatting = undefined, data = undefined) {
     let value = data?.[text];
 
     if(value === undefined) {
@@ -233,7 +233,7 @@ class Translator {
    * @param {import('./data/formatting-context').FormattingContext | undefined} formatting 
    * @returns {string}
    */
-  applyFormatting(text, formatting) {
+  applyFormatting(text, formatting = undefined) {
     if(formatting) {
       for(const key of Object.keys(formatting)) {
         const regex = new RegExp(`%{${key}}`, 'g');
@@ -279,7 +279,7 @@ class Translator {
    * @param {import('./data/formatting-context').FormattingContext | undefined} formatting 
    * @returns {string}
    */
-  useOriginalText(text, num, formatting) {
+  useOriginalText(text, num = undefined, formatting = undefined) {
     if(num === undefined) {
       return this.applyFormatting(text, formatting);
     }
